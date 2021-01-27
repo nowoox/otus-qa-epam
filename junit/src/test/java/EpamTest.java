@@ -20,4 +20,26 @@ public class EpamTest extends BaseTest {
         System.out.println("Test One text ");
         logger.info("Лог One окей");
     }
+
+    @Test
+    @DisplayName("TestRemoteTest")
+    void TestRemote() throws InterruptedException {
+        System.out.println("Test Remote text ");
+        logger.info("Лог Remote окей");
+        driver.get("https://vk.com");
+        Thread.sleep(3000);
+    }
+
+    @Test
+    @DisplayName("Test Open Epam")
+    public void TestOpenEpam() {
+
+        driver.get("https://events.epam.com");
+
+        mainPage.openEvents();
+
+        eventsPage.openUpcomingEvents();
+
+        //logger.info("1");
+    }
 }
