@@ -26,16 +26,6 @@ public abstract class BasePage {
         driver.findElement(elementBy).click();
     }
 
-    public void clickViaTry(By elementBy) {
-        //waitIsClickable(elementBy);
-
-        try {
-            click(elementBy);
-        } catch (org.openqa.selenium.StaleElementReferenceException ex) {
-            click(elementBy);
-            ;
-        }
-    }
 
     public void moveAndClick(By elementBy) {
 

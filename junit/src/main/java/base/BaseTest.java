@@ -8,8 +8,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import pages.EventPage;
 import pages.EventsPage;
 import pages.MainPage;
+import pages.VideoPage;
 
 import java.net.MalformedURLException;
 
@@ -19,10 +21,12 @@ public class BaseTest {
     public Logger logger = LogManager.getLogger(BaseTest.class);
     public MainPage mainPage;
     public EventsPage eventsPage;
+    public EventPage eventPage;
+    public VideoPage videoPage;
     protected WebDriver driver;
 
     @BeforeEach
-    void setUp() throws MalformedURLException {
+    void setUp() {
         DriverFactory driverFactory = new DriverFactory();
         WebDriverManager.chromedriver().setup();
         driver = driverFactory.createDriver();
@@ -30,6 +34,11 @@ public class BaseTest {
 
         mainPage = PageFactory.initElements(driver, MainPage.class);
         eventsPage = PageFactory.initElements(driver, EventsPage.class);
+        eventPage = PageFactory.initElements(driver, EventPage.class);
+        videoPage = PageFactory.initElements(driver, VideoPage.class);
+
+
+        driver.get("https://events.epam.com");
     }
 
     @AfterEach

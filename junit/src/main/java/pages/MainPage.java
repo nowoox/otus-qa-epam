@@ -1,6 +1,7 @@
 package pages;
 
 import base.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,6 +11,9 @@ public class MainPage extends BasePage {
 
     @FindBy(xpath = "//a[contains(@href, '/events')]")
     private WebElement eventLink;
+
+    @FindBy(xpath = "//a[contains(@href, '/video')]")
+    private WebElement videoLink;
 
     @FindBy(css = "#onetrust-accept-btn-handler")
     private WebElement acceptCookiesButton;
@@ -22,7 +26,8 @@ public class MainPage extends BasePage {
         super(webDriver);
     }
 
-    public void openEvents() {
+    @Step
+    public void acceptCookies() {
 
         webDriverWait.until(ExpectedConditions.visibilityOf(cookiesBanner));
         logElementIsDisplayed(cookiesBanner);
@@ -33,8 +38,25 @@ public class MainPage extends BasePage {
         webDriverWait.until(ExpectedConditions.invisibilityOf(cookiesBanner));
         logger.info("Element is not displayed: " + cookiesBanner);
 
+    }
+
+    @Step
+    public void openEvents() {
+
+        acceptCookies();
+
         eventLink.click();
         logElementIsClicked(eventLink);
+    }
+
+    @Step
+    public void openVideos() {
+
+        acceptCookies();
+
+        videoLink.click();
+        logElementIsClicked(videoLink);
+
     }
 
 
