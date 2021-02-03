@@ -43,6 +43,8 @@ public class EpamTest extends BaseTest {
 
         videoPage.adjustFilter();
 
+        videoPage.checkFoundTalksInfo();
+
     }
 
     @Test

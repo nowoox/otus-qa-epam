@@ -5,7 +5,6 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -26,30 +25,24 @@ public abstract class BasePage {
         driver.findElement(elementBy).click();
     }
 
-
-    public void moveAndClick(By elementBy) {
-
-        Actions builder = new Actions(driver);
-
-        builder.moveToElement(driver.findElement(elementBy))
-                .click()
-                .build()
-                .perform();
-
-        //logger.info("Выполнен клик по элементу: " + elementBy);
-    }
-
-    public void waitIsClickable(By elementBy) {
-        webDriverWait.until(ExpectedConditions.elementToBeClickable(elementBy));
-        logger.info("Элемент найден: " + elementBy);
+    public void waitIsClickable(WebElement ele) {
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(ele));
     }
 
     public void waitVisibilityOfElement(WebElement ele) {
         webDriverWait.until(ExpectedConditions.visibilityOf(ele));
     }
 
+    public void waitInvisibilityOfElement(WebElement ele) {
+        webDriverWait.until(ExpectedConditions.invisibilityOf(ele));
+    }
+
     public void logElementIsDisplayed(WebElement ele) {
         logger.info("Element is displayed: " + ele);
+    }
+
+    public void logElementIsNotDisplayed(WebElement ele) {
+        logger.info("Element is not displayed: " + ele);
     }
 
     public void logElementIsClicked(WebElement ele) {

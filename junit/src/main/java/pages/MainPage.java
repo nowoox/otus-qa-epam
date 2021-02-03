@@ -35,8 +35,8 @@ public class MainPage extends BasePage {
         acceptCookiesButton.click();
         logElementIsClicked(acceptCookiesButton);
 
-        webDriverWait.until(ExpectedConditions.invisibilityOf(cookiesBanner));
-        logger.info("Element is not displayed: " + cookiesBanner);
+        waitInvisibilityOfElement(cookiesBanner);
+        logElementIsNotDisplayed(cookiesBanner);
 
     }
 

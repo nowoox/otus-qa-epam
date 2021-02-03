@@ -4,12 +4,13 @@ import base.BasePage;
 import io.qameta.allure.Step;
 import junit.framework.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VideoPage extends BasePage {
@@ -23,11 +24,17 @@ public class VideoPage extends BasePage {
     @FindBy(css = "#filter_language")
     private WebElement languageDropDown;
 
+    @FindBy(css = "#filter_category")
+    private WebElement categoryDropDown;
+
     @FindBy(xpath = "//*[@data-value='Belarus']")
     private WebElement belarusItem;
 
     @FindBy(xpath = "//*[@data-value='ENGLISH']")
     private WebElement englishLanguageItem;
+
+    @FindBy(xpath = "//*[@data-value='Testing']")
+    private WebElement testingCategoryItem;
 
     @FindBy(xpath = "//input[contains(@class, 'evnt-search') and contains(@placeholder, 'Search by Talk Name')]")
     private WebElement searchField;
@@ -35,14 +42,22 @@ public class VideoPage extends BasePage {
     @FindBy(xpath = "//div[contains(@class, 'evnt-talks-column')]")
     private List<WebElement> listOfCards;
 
-    @FindBy(xpath = "//div[contains(@class, 'evnt-cards-container')]")
-    private WebElement resultFound;
+    @FindBy(xpath = "//span[contains(text(), 'QA')]")
+    private WebElement resultFoundQA;
+
+    @FindBy(xpath = "//span[contains(text(), 'Testing')]")
+    private WebElement resultFoundTesting;
+
+    @FindBy(xpath = "//div[contains(@class, 'collapsing')]")
+    private WebElement progress;
 
     String query = "QA";
 
     public VideoPage(WebDriver webDriver) {
         super(webDriver);
     }
+
+    public EventPage eventPage = new EventPage(driver);
 
     @Step
     public void adjustFilter() {
@@ -53,14 +68,62 @@ public class VideoPage extends BasePage {
         moreFilterButton.click();
         logElementIsClicked(moreFilterButton);
 
-        waitVisibilityOfElement(locationDropDown);
-        logElementIsDisplayed(locationDropDown);
+        waitIsClickable(locationDropDown);
+        logElementIsNotDisplayed(locationDropDown);
 
         locationDropDown.click();
         logElementIsClicked(locationDropDown);
 
         belarusItem.click();
         logElementIsClicked(belarusItem);
+
+        languageDropDown.click();
+        logElementIsClicked(languageDropDown);
+
+        englishLanguageItem.click();
+        logElementIsClicked(englishLanguageItem);
+
+        categoryDropDown.click();
+        logElementIsClicked(categoryDropDown);
+
+        testingCategoryItem.click();
+        logElementIsClicked(testingCategoryItem);
+
+    }
+
+    @Step
+    public void checkFoundTalksInfo() {
+
+        String originalHandle = driver.getWindowHandle();
+
+
+        waitVisibilityOfElement(resultFoundTesting);
+        logElementIsDisplayed(resultFoundTesting);
+
+        for (WebElement ele : listOfCards) {
+
+            Actions newTab = new Actions(driver);
+            newTab.keyDown(Keys.CONTROL)
+                    .click(ele)
+                    .keyUp(Keys.CONTROL)
+                    .build()
+                    .perform();
+
+            ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+            driver.switchTo().window(tabs.get(1));
+
+            eventPage.checkIfLabelPresented();
+
+            for(String handle : driver.getWindowHandles()) {
+                if (!handle.equals(originalHandle)) {
+                    driver.switchTo().window(handle);
+                    driver.close();
+                }
+            }
+
+            driver.switchTo().window(originalHandle);
+
+        }
 
     }
 
@@ -73,8 +136,8 @@ public class VideoPage extends BasePage {
         searchField.sendKeys(query);
         logger.info("Typed text " + query + " to " + searchField);
 
-        waitVisibilityOfElement(resultFound);
-        logElementIsDisplayed(resultFound);
+        waitVisibilityOfElement(resultFoundQA);
+        logElementIsDisplayed(resultFoundQA);
 
         Assert.assertNotSame("List of found items is empty", listOfCards.size(), 0);
         logger.info("Found " + listOfCards.size() + " talks");
@@ -92,4 +155,5 @@ public class VideoPage extends BasePage {
         }
 
     }
+
 }

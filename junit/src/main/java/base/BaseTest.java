@@ -37,16 +37,13 @@ public class BaseTest {
         eventPage = PageFactory.initElements(driver, EventPage.class);
         videoPage = PageFactory.initElements(driver, VideoPage.class);
 
-
         driver.get("https://events.epam.com");
     }
 
     @AfterEach
     void setDown() {
-        if (driver != null) {
-            driver.quit();
-            logger.info("Driver was stopped");
-        }
+        driver.quit();
+        logger.info("Driver was stopped");
     }
 
 }
