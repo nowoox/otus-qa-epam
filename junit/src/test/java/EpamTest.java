@@ -2,6 +2,9 @@ import base.BaseTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static base.BasePage.EventsType.PAST;
+import static base.BasePage.EventsType.UPCOMNIG;
+
 public class EpamTest extends BaseTest {
 
 
@@ -13,7 +16,7 @@ public class EpamTest extends BaseTest {
 
         eventsPage.openUpcomingEvents();
 
-        eventsPage.checkIfCountersMatch();
+        eventsPage.checkIfCountersMatch(UPCOMNIG);
 
     }
 
@@ -31,7 +34,13 @@ public class EpamTest extends BaseTest {
     @DisplayName("Check past events")
     public void checkPastEvents() {
 
+        mainPage.openEvents();
 
+        eventsPage.openPastEvents();
+
+        eventsPage.adjustFilter();
+
+        eventsPage.checkIfCountersMatch(PAST);
 
     }
 

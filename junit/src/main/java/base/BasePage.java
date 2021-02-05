@@ -11,6 +11,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class BasePage {
 
+    public enum EventsType {
+        PAST,
+        UPCOMNIG
+    }
+
     public WebDriver driver;
     public WebDriverWait webDriverWait;
     public Logger logger = LogManager.getLogger(BaseTest.class);

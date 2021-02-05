@@ -7,6 +7,9 @@ import org.apache.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import pages.EventPage;
 import pages.EventsPage;
@@ -14,6 +17,8 @@ import pages.MainPage;
 import pages.VideoPage;
 
 import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
 
@@ -26,11 +31,25 @@ public class BaseTest {
     protected WebDriver driver;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws MalformedURLException {
         DriverFactory driverFactory = new DriverFactory();
         WebDriverManager.chromedriver().setup();
-        driver = driverFactory.createDriver();
-        logger.info("Driver was started");
+//        driver = driverFactory.createDriver();
+//        logger.info("Driver was started");
+
+
+        String selenoidURL = "http://localhost:4444/wd/hub";
+        DesiredCapabilities caps = new DesiredCapabilities();
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        caps.setBrowserName("chrome");
+        caps.setVersion("86.0");
+        caps.setCapability("enableVNC", true);
+        caps.setCapability("screenResolution", "1280x1024");
+        caps.setCapability("enableVideo", false);
+        caps.setCapability("enableLog", true);
+        driver = new RemoteWebDriver(new URL(selenoidURL), caps);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
         mainPage = PageFactory.initElements(driver, MainPage.class);
         eventsPage = PageFactory.initElements(driver, EventsPage.class);

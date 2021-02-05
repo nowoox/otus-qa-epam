@@ -7,17 +7,30 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class EventsPage extends BasePage {
 
     @FindBy(css = "a.active:nth-child(1) > span:nth-child(1)")
     private WebElement upcomingEventsButton;
 
+    @FindBy(css = "li.evnt-tab-item:nth-child(2) > a:nth-child(1) > span:nth-child(1)")
+    private WebElement pastEventsButton;
+
     @FindBy(css = "a.active:nth-child(1) > span:nth-child(3)")
     private WebElement eventCounterSpan;
 
     @FindBy(css = "div.evnt-event-card")
     private WebElement upcomingEventPanel;
+
+    @FindBy(xpath = "//div[contains(@class, 'evnt-cards-container')]")
+    private WebElement cardsContainer;
+
+    @FindBy(css = "#filter_location")
+    private WebElement locationDropDown;
+
+    @FindBy(xpath = "//*[@data-value='Canada']")
+    private WebElement canadaItem;
 
     public EventsPage(WebDriver webDriver) {
         super(webDriver);
@@ -35,13 +48,25 @@ public class EventsPage extends BasePage {
     }
 
     @Step
-    public void checkIfCountersMatch() {
-        Assert.assertEquals("Number of upcoming events is not same",
-                getNumberOfUpcomingEventsOnLink(), getNumberOfUpcomingEventsOnPanels());
+    public void checkIfCountersMatch(EventsType event) {
+
+        switch (event) {
+
+            case PAST:
+                Assert.assertEquals("Number of past events is not same",
+                        getNumberOfEventsOnLink(), getNumberOfPastEventsOnPanels());
+                break;
+
+            case UPCOMNIG:
+                Assert.assertEquals("Number of upcoming events is not same",
+                        getNumberOfEventsOnLink(), getNumberOfUpcomingEventsOnPanels());
+                break;
+        }
+
         logger.info("Number of upcoming events is same on link and on panels");
     }
 
-    private int getNumberOfUpcomingEventsOnLink() {
+    private int getNumberOfEventsOnLink() {
 
         int number = Integer.parseInt(eventCounterSpan.getText());
         logger.info("Number of upcoming events on link is " + number);
@@ -55,5 +80,40 @@ public class EventsPage extends BasePage {
         logger.info("Number of upcoming events on panels is " + number);
 
         return number;
+    }
+
+    private int getNumberOfPastEventsOnPanels() {
+
+        int number = driver.findElements(By.cssSelector("div.evnt-event-card")).size();
+        logger.info("Number of past events on panels is " + number);
+
+        return number;
+    }
+
+    @Step
+    public void openPastEvents() {
+
+        waitVisibilityOfElement(pastEventsButton);
+        logElementIsDisplayed(pastEventsButton);
+
+        pastEventsButton.click();
+        logElementIsClicked(pastEventsButton);
+
+        waitVisibilityOfElement(cardsContainer);
+        logElementIsDisplayed(cardsContainer);
+    }
+
+    @Step
+    public void adjustFilter() {
+
+        locationDropDown.click();
+        logElementIsClicked(locationDropDown);
+
+        canadaItem.click();
+        logElementIsClicked(canadaItem);
+
+        webDriverWait.until(ExpectedConditions.
+                invisibilityOf(driver.findElement(By.xpath("//*[contains(@class, 'evnt-global-loader')]"))));
+
     }
 }
