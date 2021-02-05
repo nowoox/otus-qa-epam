@@ -35,36 +35,37 @@ public class BaseTest {
     void setUp() throws MalformedURLException {
         DriverFactory driverFactory = new DriverFactory();
         WebDriverManager.chromedriver().setup();
-//        driver = driverFactory.createDriver();
-//        logger.info("Driver was started");
+        driver = driverFactory.createDriver();
+        logger.info("Driver was started");
 
 
-        String selenoidURL = "http://localhost:4444/wd/hub";
-        DesiredCapabilities caps = new DesiredCapabilities();
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        caps.setBrowserName("chrome");
-        caps.setVersion("88.0");
-        caps.setCapability("enableVNC", true);
-        caps.setCapability("screenResolution", "1280x1024");
-        caps.setCapability("enableVideo", false);
-        caps.setCapability("enableLog", true);
-        caps.setCapability("headless", true);
+////        String selenoidURL = "http://localhost:4444/wd/hub";
+////        DesiredCapabilities caps = new DesiredCapabilities();
+////        WebDriverManager.chromedriver().setup();
+//        driver = new ChromeDriver();
+//        caps.setBrowserName("chrome");
+//        caps.setVersion("88.0");
+//        caps.setCapability("enableVNC", true);
+//        caps.setCapability("screenResolution", "1280x1024");
+//        caps.setCapability("enableVideo", false);
+//        caps.setCapability("enableLog", true);
+//        caps.setCapability("headless", true);
 //        driver = new RemoteWebDriver(new URL(selenoidURL), caps);
 
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("start-maximized"); // open Browser in maximized mode
-        options.addArguments("disable-infobars"); // disabling infobars
-        options.addArguments("--disable-extensions"); // disabling extensions
-        options.addArguments("--disable-gpu"); // applicable to windows os only
-        //options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
-        options.addArguments("--no-sandbox"); // Bypass OS security model
-        options.addArguments("--whitelisted-ips='127.0.0.1'");
+//        ChromeOptions options = new ChromeOptions();
+ //       options.addArguments("start-maximized"); // open Browser in maximized mode
+//        options.addArguments("disable-infobars"); // disabling infobars
+//        options.addArguments("--disable-extensions"); // disabling extensions
+//        options.addArguments("--disable-gpu"); // applicable to windows os only
+//        //options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+//        options.addArguments("--no-sandbox"); // Bypass OS security model
+//        options.addArguments("--whitelisted-ips='127.0.0.1'");
 
-        caps.setCapability(ChromeOptions.CAPABILITY, options);
+//        caps.setCapability(ChromeOptions.CAPABILITY, options);
 
-        WebDriver driver = new RemoteWebDriver(new URL(selenoidURL), caps);
+//        WebDriver driver = new RemoteWebDriver(new URL(selenoidURL), caps);
 
+//        WebDriver driver = new ChromeDriver(options);
 
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
