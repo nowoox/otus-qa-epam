@@ -63,7 +63,7 @@ public class BaseTest {
 
         caps.setCapability(ChromeOptions.CAPABILITY, options);
 
-        WebDriver driver = new RemoteWebDriver(new URL(selenoidURL), options);
+        WebDriver driver = new RemoteWebDriver(new URL(selenoidURL), caps);
 
 
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
