@@ -8,6 +8,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -42,14 +43,25 @@ public class BaseTest {
         DesiredCapabilities caps = new DesiredCapabilities();
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        caps.setBrowserName("chrome");
-        caps.setVersion("88.0");
-        caps.setCapability("enableVNC", true);
-        caps.setCapability("screenResolution", "1280x1024");
-        caps.setCapability("enableVideo", false);
-        caps.setCapability("enableLog", true);
-        caps.setCapability("headless", true);
-        driver = new RemoteWebDriver(new URL(selenoidURL), caps);
+//        caps.setBrowserName("chrome");
+//        caps.setVersion("88.0");
+//        caps.setCapability("enableVNC", true);
+//        caps.setCapability("screenResolution", "1280x1024");
+//        caps.setCapability("enableVideo", false);
+//        caps.setCapability("enableLog", true);
+//        caps.setCapability("headless", true);
+//        driver = new RemoteWebDriver(new URL(selenoidURL), caps);
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("start-maximized"); // open Browser in maximized mode
+        options.addArguments("disable-infobars"); // disabling infobars
+        options.addArguments("--disable-extensions"); // disabling extensions
+        options.addArguments("--disable-gpu"); // applicable to windows os only
+        options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+        options.addArguments("--no-sandbox"); // Bypass OS security model
+        WebDriver driver = new RemoteWebDriver(options);
+
+
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
         mainPage = PageFactory.initElements(driver, MainPage.class);
