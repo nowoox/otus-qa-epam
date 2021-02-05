@@ -48,6 +48,7 @@ public class BaseTest {
         caps.setCapability("screenResolution", "1280x1024");
         caps.setCapability("enableVideo", false);
         caps.setCapability("enableLog", true);
+        caps.setCapability("headless", true);
         driver = new RemoteWebDriver(new URL(selenoidURL), caps);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
