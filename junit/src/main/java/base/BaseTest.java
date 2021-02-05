@@ -43,7 +43,7 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         caps.setBrowserName("chrome");
-        caps.setVersion("86.0");
+        caps.setVersion("88.0");
         caps.setCapability("enableVNC", true);
         caps.setCapability("screenResolution", "1280x1024");
         caps.setCapability("enableVideo", false);
