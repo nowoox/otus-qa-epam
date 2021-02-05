@@ -43,13 +43,13 @@ public class BaseTest {
         DesiredCapabilities caps = new DesiredCapabilities();
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-//        caps.setBrowserName("chrome");
-//        caps.setVersion("88.0");
-//        caps.setCapability("enableVNC", true);
-//        caps.setCapability("screenResolution", "1280x1024");
-//        caps.setCapability("enableVideo", false);
-//        caps.setCapability("enableLog", true);
-//        caps.setCapability("headless", true);
+        caps.setBrowserName("chrome");
+        caps.setVersion("88.0");
+        caps.setCapability("enableVNC", true);
+        caps.setCapability("screenResolution", "1280x1024");
+        caps.setCapability("enableVideo", false);
+        caps.setCapability("enableLog", true);
+        caps.setCapability("headless", true);
 //        driver = new RemoteWebDriver(new URL(selenoidURL), caps);
 
         ChromeOptions options = new ChromeOptions();
@@ -60,6 +60,8 @@ public class BaseTest {
         //options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
         options.addArguments("--no-sandbox"); // Bypass OS security model
         options.addArguments("--whitelisted-ips='127.0.0.1'");
+
+        caps.setCapability(ChromeOptions.CAPABILITY, options);
 
         WebDriver driver = new RemoteWebDriver(new URL(selenoidURL), options);
 
