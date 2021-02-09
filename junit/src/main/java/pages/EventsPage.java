@@ -32,6 +32,21 @@ public class EventsPage extends BasePage {
     @FindBy(xpath = "//*[@data-value='Canada']")
     private WebElement canadaItem;
 
+    @FindBy(xpath = "//div[@class='evnt-card-heading']/div/div[1]")
+    private WebElement eventLocation;
+
+    @FindBy(xpath = "//div[@class='evnt-card-heading']/div/div[2]")
+    private WebElement eventLanguage;
+
+    @FindBy(xpath = "//div[@class='evnt-card-body']/div/div[1]")
+    private WebElement eventName;
+
+    @FindBy(xpath = "//div[@class='evnt-card-body']/div/div[2]")
+    private WebElement eventDate;
+
+    @FindBy(xpath = "//div[@class='evnt-card-footer']/div/div[1]")
+    private WebElement eventSpeakers;
+
     public EventsPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -114,6 +129,28 @@ public class EventsPage extends BasePage {
 
         webDriverWait.until(ExpectedConditions.
                 invisibilityOf(driver.findElement(By.xpath("//*[contains(@class, 'evnt-global-loader')]"))));
+
+    }
+
+    @Step
+    public void checkEventCardInfo() {
+
+        waitVisibilityOfElement(eventLocation);
+
+        Assertions.assertTrue(eventLocation.isDisplayed());
+        logElementIsDisplayed(eventLocation);
+
+        Assertions.assertTrue(eventLanguage.isDisplayed());
+        logElementIsDisplayed(eventLanguage);
+
+        Assertions.assertTrue(eventName.isDisplayed());
+        logElementIsDisplayed(eventLocation);
+
+        Assertions.assertTrue(eventDate.isDisplayed());
+        logElementIsDisplayed(eventDate);
+
+        Assertions.assertTrue(eventSpeakers.isDisplayed());
+        logElementIsDisplayed(eventSpeakers);
 
     }
 }

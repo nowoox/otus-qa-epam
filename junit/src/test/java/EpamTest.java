@@ -67,4 +67,13 @@ public class EpamTest extends BaseTest {
         videoPage.checkFoundTalksTitle();
 
     }
+
+    @Test@DisplayName("Event card info test")
+    public void eventCardInfoTest() {
+
+        mainPage.openEvents();
+
+        eventsPage.checkEventCardInfo();
+
+    }
 }

@@ -17,8 +17,6 @@ public class EventPage extends BasePage {
 
     public void checkIfLabelPresented() {
 
-
-
         waitVisibilityOfElement(searchLabel);
         Assertions.assertTrue(searchLabel.isDisplayed(), "Label is not presented");
         logElementIsDisplayed(searchLabel);
