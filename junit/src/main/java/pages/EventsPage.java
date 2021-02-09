@@ -2,7 +2,7 @@ package pages;
 
 import base.BasePage;
 import io.qameta.allure.Step;
-import junit.framework.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -53,12 +53,12 @@ public class EventsPage extends BasePage {
         switch (event) {
 
             case PAST:
-                Assert.assertEquals("Number of past events is not same",
+                Assertions.assertEquals(
                         getNumberOfEventsOnLink(), getNumberOfPastEventsOnPanels());
                 break;
 
             case UPCOMNIG:
-                Assert.assertEquals("Number of upcoming events is not same",
+                Assertions.assertEquals(
                         getNumberOfEventsOnLink(), getNumberOfUpcomingEventsOnPanels());
                 break;
         }

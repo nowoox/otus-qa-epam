@@ -2,7 +2,7 @@ package pages;
 
 import base.BasePage;
 import io.qameta.allure.Step;
-import junit.framework.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -139,7 +139,7 @@ public class VideoPage extends BasePage {
         waitVisibilityOfElement(resultFoundQA);
         logElementIsDisplayed(resultFoundQA);
 
-        Assert.assertNotSame("List of found items is empty", listOfCards.size(), 0);
+        Assertions.assertNotSame(listOfCards.size(), 0, "List of found items is empty");
         logger.info("Found " + listOfCards.size() + " talks");
     }
 
@@ -148,9 +148,9 @@ public class VideoPage extends BasePage {
 
         for (WebElement ele : listOfCards) {
 
-           Assert.assertTrue("No query string in title", ele.findElement(By.xpath("//*[contains(@class, 'evnt-talk-name')]/h1/span"))
-                   .getText()
-                   .contains(query));
+           Assertions.assertTrue(ele.findElement(By.xpath("//*[contains(@class, 'evnt-talk-name')]/h1/span"))
+                              .getText()
+                              .contains(query), "No query string in title");
            logger.info("Title of card " + listOfCards.indexOf(ele) + " contains query string");
         }
 
