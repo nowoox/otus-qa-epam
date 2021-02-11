@@ -15,6 +15,9 @@ public class EventPage extends BasePage {
     @FindBy(xpath = "//label[contains(text(), 'QA')]")
     private WebElement searchLabel;
 
+    /**
+     * Метод выполняет поиск тега QA на странице мероприятия
+     */
     public void checkIfLabelPresented() {
 
         waitVisibilityOfElement(searchLabel);

@@ -26,6 +26,11 @@ public class MainPage extends BasePage {
         super(webDriver);
     }
 
+    /**
+     * Метод выполняет нажатие кнопки на всплывающем баннере
+     * для соглашения использования cookies
+     *
+     */
     @Step
     public void acceptCookies() {
 
@@ -40,6 +45,9 @@ public class MainPage extends BasePage {
 
     }
 
+    /**
+     * Метод выполняет переход на вкладку Events
+     */
     @Step
     public void openEvents() {
 
@@ -49,6 +57,9 @@ public class MainPage extends BasePage {
         logElementIsClicked(eventLink);
     }
 
+    /**
+     * Метод выполняет переход на вкладку Videos
+     */
     @Step
     public void openVideos() {
 

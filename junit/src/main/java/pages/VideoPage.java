@@ -59,6 +59,13 @@ public class VideoPage extends BasePage {
 
     public EventPage eventPage = new EventPage(driver);
 
+    /**
+     * Метод выплняет настройку фильтра для поиска мероприятий по
+     * следующим параметрам
+     * Category: Testing
+     * Location: Belarus
+     * Language: English
+     */
     @Step
     public void adjustFilter() {
 
@@ -91,6 +98,9 @@ public class VideoPage extends BasePage {
 
     }
 
+    /**
+     * Метод выполняет проверку наличия тега на странице мероприятия
+     */
     @Step
     public void checkFoundTalksInfo() {
 
@@ -122,11 +132,13 @@ public class VideoPage extends BasePage {
             }
 
             driver.switchTo().window(originalHandle);
-
         }
-
     }
 
+    /**
+     * Метод выполяент ввод ключевого слова для поиска и
+     * непосредствнно запускает поиск
+     */
     @Step
     public void typeAndSearch() {
 
@@ -143,6 +155,10 @@ public class VideoPage extends BasePage {
         logger.info("Found " + listOfCards.size() + " talks");
     }
 
+    /**
+     * Метод выполняет проерку наличия ключевого слова поиска
+     * в заголовке найденных карточек мероприятий
+     */
     @Step
     public void checkFoundTalksTitle() {
 

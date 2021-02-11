@@ -13,7 +13,7 @@ public abstract class BasePage {
 
     public enum EventsType {
         PAST,
-        UPCOMNIG
+        UPCOMING
     }
 
     public WebDriver driver;

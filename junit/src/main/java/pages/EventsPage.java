@@ -51,6 +51,9 @@ public class EventsPage extends BasePage {
         super(webDriver);
     }
 
+    /**
+     * Метод выполняет переход на вкладку предстоящих мероприятий
+     */
     @Step
     public void openUpcomingEvents() {
 
@@ -59,9 +62,13 @@ public class EventsPage extends BasePage {
 
         upcomingEventsButton.click();
         logElementIsClicked(upcomingEventsButton);
-
     }
 
+    /**
+     * Метод выполняет проверку соответствия счетчика на панели
+     * и количества отображаемых карточек
+     * @param event тип мероприятий: предстоящие или прошедшие
+     */
     @Step
     public void checkIfCountersMatch(EventsType event) {
 
@@ -72,7 +79,7 @@ public class EventsPage extends BasePage {
                         getNumberOfEventsOnLink(), getNumberOfPastEventsOnPanels());
                 break;
 
-            case UPCOMNIG:
+            case UPCOMING:
                 Assertions.assertEquals(
                         getNumberOfEventsOnLink(), getNumberOfUpcomingEventsOnPanels());
                 break;
@@ -81,6 +88,9 @@ public class EventsPage extends BasePage {
         logger.info("Number of upcoming events is same on link and on panels");
     }
 
+    /**
+     * @return количество мероприятий на счетчике панели
+     */
     private int getNumberOfEventsOnLink() {
 
         int number = Integer.parseInt(eventCounterSpan.getText());
@@ -89,6 +99,9 @@ public class EventsPage extends BasePage {
         return number;
     }
 
+    /**
+     * @return количество карточек предстоящих мероприятий на странице
+     */
     private int getNumberOfUpcomingEventsOnPanels() {
 
         int number = driver.findElements(By.cssSelector("div.evnt-event-card")).size();
@@ -97,6 +110,9 @@ public class EventsPage extends BasePage {
         return number;
     }
 
+    /**
+     * @return количество карточек прошедших мероприятий на странице
+     */
     private int getNumberOfPastEventsOnPanels() {
 
         int number = driver.findElements(By.cssSelector("div.evnt-event-card")).size();
@@ -105,6 +121,9 @@ public class EventsPage extends BasePage {
         return number;
     }
 
+    /**
+     * Метод выполняет переход на вкладку прошедших мероприятий
+     */
     @Step
     public void openPastEvents() {
 
@@ -118,6 +137,10 @@ public class EventsPage extends BasePage {
         logElementIsDisplayed(cardsContainer);
     }
 
+    /**
+     * Метод выполняет настройку фильтра для поиска по
+     * location: Canada
+     */
     @Step
     public void adjustFilter() {
 
@@ -132,6 +155,9 @@ public class EventsPage extends BasePage {
 
     }
 
+    /**
+     * Метод выполняет проверку отображения полей на карточке мероприятия
+     */
     @Step
     public void checkEventCardInfo() {
 
