@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
 import pages.EventPage;
 import pages.EventsPage;
@@ -29,9 +30,15 @@ public class BaseTest {
         DriverFactory driverFactory = new DriverFactory();
         WebDriverManager.chromedriver().setup();
         driver = driverFactory.createDriver();
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--start-maximized");
+
         logger.info("Driver was started");
 
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.manage().
+                timeouts().
+                implicitlyWait(20, TimeUnit.SECONDS);
 
         mainPage = PageFactory.initElements(driver, MainPage.class);
         eventsPage = PageFactory.initElements(driver, EventsPage.class);
@@ -48,3 +55,4 @@ public class BaseTest {
     }
 
 }
+

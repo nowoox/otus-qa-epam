@@ -106,7 +106,6 @@ public class VideoPage extends BasePage {
 
         String originalHandle = driver.getWindowHandle();
 
-
         waitVisibilityOfElement(resultFoundTesting);
         logElementIsDisplayed(resultFoundTesting);
 
@@ -121,6 +120,8 @@ public class VideoPage extends BasePage {
 
             ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
             driver.switchTo().window(tabs.get(1));
+            driver.navigate().refresh();
+            logger.info("Tab " + tabs.get(1) + " is opened");
 
             eventPage.checkIfLabelPresented();
 

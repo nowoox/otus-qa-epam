@@ -29,7 +29,7 @@ public class DriverFactory {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName("chrome");
-        capabilities.setVersion("80.0");
+        capabilities.setVersion("86.0");
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", true);
         remoteDriver.set(new RemoteWebDriver(

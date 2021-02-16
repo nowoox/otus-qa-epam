@@ -2,17 +2,21 @@ import base.BaseTest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 
 import static base.BasePage.EventsType.PAST;
 import static base.BasePage.EventsType.UPCOMING;
 
 public class EpamTest extends BaseTest {
 
-    /**
+
+     /**
      * Тест-кейс для проверки соответствия счетчика предстоящих
      * мероприятий и количества отображаемых карточек
      */
     @Test
+    @Execution(ExecutionMode.CONCURRENT)
     @DisplayName("Check number of upcoming events")
     public void CheckNumberOfUpcomingEvents() {
 
@@ -50,6 +54,7 @@ public class EpamTest extends BaseTest {
      * Location: Canada
      */
     @Test
+    @Execution(ExecutionMode.CONCURRENT)
     @DisplayName("Check past events")
     public void checkPastEvents() {
 
@@ -73,6 +78,7 @@ public class EpamTest extends BaseTest {
      * страницу мероприятия и проверка тегов соответствующих Category
      */
     @Test
+    @Execution(ExecutionMode.CONCURRENT)
     @DisplayName("Video filter test")
     public void videoFilterTest() {
 
@@ -89,6 +95,7 @@ public class EpamTest extends BaseTest {
      * в заголовках найденных карточек мероприятий
      */
     @Test
+    @Execution(ExecutionMode.CONCURRENT)
     @DisplayName("Video search test")
     public void videoSearchTest() {
 
@@ -105,6 +112,7 @@ public class EpamTest extends BaseTest {
      * отображаемых на карточке мероприятия
      */
     @Test
+    @Execution(ExecutionMode.CONCURRENT)
     @DisplayName("Event card info test")
     public void eventCardInfoTest() {
 
