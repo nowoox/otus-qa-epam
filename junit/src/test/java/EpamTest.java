@@ -54,7 +54,7 @@ public class EpamTest extends BaseTest {
      * Location: Canada
      */
     @Test
-    @Execution(ExecutionMode.CONCURRENT)
+ //   @Execution(ExecutionMode.CONCURRENT)
     @DisplayName("Check past events")
     public void checkPastEvents() {
 
@@ -78,7 +78,7 @@ public class EpamTest extends BaseTest {
      * страницу мероприятия и проверка тегов соответствующих Category
      */
     @Test
-    @Execution(ExecutionMode.CONCURRENT)
+    //@Execution(ExecutionMode.CONCURRENT)
     @DisplayName("Video filter test")
     public void videoFilterTest() {
 

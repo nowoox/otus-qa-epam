@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
 import pages.EventPage;
 import pages.EventsPage;
@@ -15,6 +14,9 @@ import pages.MainPage;
 import pages.VideoPage;
 
 import java.util.concurrent.TimeUnit;
+
+import static driver.DriverFactory.Browsers.CHROME;
+import static driver.DriverFactory.Browsers.OPERA;
 
 public class BaseTest {
 
@@ -29,10 +31,11 @@ public class BaseTest {
     void setUp() {
         DriverFactory driverFactory = new DriverFactory();
         WebDriverManager.chromedriver().setup();
-        driver = driverFactory.createDriver();
+        WebDriverManager.firefoxdriver().setup();
+        WebDriverManager.operadriver().setup();
 
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
+        driver = driverFactory.createDriver(CHROME);
+        //driver = driverFactory.createRemoteDriver();
 
         logger.info("Driver was started");
 

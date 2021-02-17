@@ -1,9 +1,7 @@
 package base;
 
-import io.github.bonigarcia.seljup.SeleniumJupiter;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
