@@ -3,7 +3,7 @@ cd C:\temp
 cm_windows_386.exe selenoid start
 cm_windows_386.exe selenoid-ui start
 
-docker pull selenoid/vnc_chrome:86.0
+docker pull selenoid/vnc_chrome:88.0
 docker pull selenoid/vnc_firefox:81.0
 
 docker ps

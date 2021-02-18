@@ -16,6 +16,7 @@ public class EpamTest extends BaseTest {
      * мероприятий и количества отображаемых карточек
      */
     @Test
+    @Disabled //
     @Execution(ExecutionMode.CONCURRENT)
     @DisplayName("Check number of upcoming events")
     public void CheckNumberOfUpcomingEvents() {
@@ -54,7 +55,8 @@ public class EpamTest extends BaseTest {
      * Location: Canada
      */
     @Test
- //   @Execution(ExecutionMode.CONCURRENT)
+    @Disabled //
+//   @Execution(ExecutionMode.CONCURRENT)
     @DisplayName("Check past events")
     public void checkPastEvents() {
 
@@ -95,6 +97,7 @@ public class EpamTest extends BaseTest {
      * в заголовках найденных карточек мероприятий
      */
     @Test
+    @Disabled//
     @Execution(ExecutionMode.CONCURRENT)
     @DisplayName("Video search test")
     public void videoSearchTest() {
@@ -112,6 +115,7 @@ public class EpamTest extends BaseTest {
      * отображаемых на карточке мероприятия
      */
     @Test
+    @Disabled//
     @Execution(ExecutionMode.CONCURRENT)
     @DisplayName("Event card info test")
     public void eventCardInfoTest() {

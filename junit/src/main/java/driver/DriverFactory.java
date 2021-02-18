@@ -48,11 +48,15 @@ public class DriverFactory {
 
     public RemoteWebDriver createRemoteDriver() {
 
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--start-maximized");
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName("chrome");
-        capabilities.setVersion("86.0");
+        capabilities.setVersion("88.0");
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", true);
+        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
         try {
             remoteDriver.set(new RemoteWebDriver(
                     new URL("http://0.0.0.0:4444/wd/hub"), capabilities));

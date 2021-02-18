@@ -111,6 +111,8 @@ public class VideoPage extends BasePage {
 
         for (WebElement ele : listOfCards) {
 
+//            System.out.println(System.getProperty("os.name"));
+
             Actions newTab = new Actions(driver);
             newTab.keyDown(Keys.CONTROL)
                     .click(ele)
@@ -125,12 +127,14 @@ public class VideoPage extends BasePage {
 
             eventPage.checkIfLabelPresented();
 
-            for(String handle : driver.getWindowHandles()) {
-                if (!handle.equals(originalHandle)) {
-                    driver.switchTo().window(handle);
-                    driver.close();
-                }
-            }
+            driver.close();
+
+//            for(String handle : driver.getWindowHandles()) {
+//                if (!handle.equals(originalHandle)) {
+//                    driver.switchTo().window(handle);
+//                    driver.close();
+//                }
+//            }
 
             driver.switchTo().window(originalHandle);
         }

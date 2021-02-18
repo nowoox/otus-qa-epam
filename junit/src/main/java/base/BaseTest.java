@@ -36,8 +36,8 @@ public class BaseTest {
         WebDriverManager.firefoxdriver().setup();
         WebDriverManager.operadriver().setup();
 
-        driver = driverFactory.createDriver(CHROME);
-        //driver = driverFactory.createRemoteDriver();
+        //driver = driverFactory.createDriver(CHROME);
+        driver = driverFactory.createRemoteDriver();
 
         logger.info("Driver was started");
 
