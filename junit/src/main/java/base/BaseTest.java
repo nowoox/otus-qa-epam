@@ -1,7 +1,9 @@
 package base;
 
+import config.ServerConfig;
 import driver.DriverFactory;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.aeonbits.owner.ConfigFactory;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
@@ -16,11 +18,11 @@ import pages.VideoPage;
 import java.util.concurrent.TimeUnit;
 
 import static driver.DriverFactory.Browsers.CHROME;
-import static driver.DriverFactory.Browsers.OPERA;
 
 public class BaseTest {
 
     public Logger logger = LogManager.getLogger(BaseTest.class);
+    public ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
     public MainPage mainPage;
     public EventsPage eventsPage;
     public EventPage eventPage;
@@ -48,7 +50,7 @@ public class BaseTest {
         eventPage = PageFactory.initElements(driver, EventPage.class);
         videoPage = PageFactory.initElements(driver, VideoPage.class);
 
-        driver.get("https://events.epam.com");
+        driver.get(cfg.base_url());
     }
 
     @AfterEach
