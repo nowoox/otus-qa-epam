@@ -1,0 +1,63 @@
+package base;
+
+import config.ServerConfig;
+import driver.DriverFactory;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.aeonbits.owner.ConfigFactory;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
+import pages.EventPage;
+import pages.EventsPage;
+import pages.MainPage;
+import pages.VideoPage;
+
+import java.util.concurrent.TimeUnit;
+
+import static driver.DriverFactory.Browsers.CHROME;
+
+public class BaseTest {
+
+    public Logger logger = LogManager.getLogger(BaseTest.class);
+    public ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
+    public MainPage mainPage;
+    public EventsPage eventsPage;
+    public EventPage eventPage;
+    public VideoPage videoPage;
+    protected WebDriver driver;
+
+    @BeforeEach
+    void setUp() {
+        DriverFactory driverFactory = new DriverFactory();
+        WebDriverManager.chromedriver().setup();
+        WebDriverManager.firefoxdriver().setup();
+        WebDriverManager.operadriver().setup();
+
+        //driver = driverFactory.createDriver(CHROME);
+        driver = driverFactory.createRemoteDriver();
+
+        logger.info("Driver was started");
+
+        driver.manage().
+                timeouts().
+                implicitlyWait(20, TimeUnit.SECONDS);
+
+        mainPage = PageFactory.initElements(driver, MainPage.class);
+        eventsPage = PageFactory.initElements(driver, EventsPage.class);
+        eventPage = PageFactory.initElements(driver, EventPage.class);
+        videoPage = PageFactory.initElements(driver, VideoPage.class);
+
+        driver.get(cfg.base_url());
+    }
+
+    @AfterEach
+    void setDown() {
+        driver.quit();
+        logger.info("Driver was stopped");
+    }
+
+}
+
